@@ -1,6 +1,6 @@
 # Django Rest Framework
 <div>
-    <img alt="Django Rest Framework" height="60" width="40" src="./img/Django REST.png">
+    <img alt="Django Rest Framework" height="200" width="200" src="./img/Django REST.png">
 </div>
 Anotações e realizações de exercícios do curso de Django Rest Framework da Geek University.
 
