@@ -5,3 +5,8 @@
 Anotações e realizações de exercícios do curso de Django Rest Framework da Geek University.
 
 Neste curso realizo criações de APIs REST com Python e a biblioteca DRF.
+
+---
+
+### Contato
+[LinkedIn](https://www.linkedin.com/in/davilos-tavares-51a4a721a/)
