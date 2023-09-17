@@ -24,6 +24,15 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
 
 class CursoSerializer(serializers.ModelSerializer):
 
+    # avaliacoes = AvaliacaoSerializer(many=True, read_only=True)
+    # Nested Relationship
+
+    # avaliacoes = serializers. HyperlinkedRelatedField(many=True, read_only=True, view_name='avaliacao-detail')
+    # HyperLinked Related Field
+
+    avaliacoes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # Primary Key Related Field
+
     class Meta:
         model = Curso
         fields = "__all__"
