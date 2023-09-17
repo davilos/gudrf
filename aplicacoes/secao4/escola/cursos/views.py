@@ -4,6 +4,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import mixins
 
 from .models import Curso, Avaliacao
 from .serializers import CursoSerializer, AvaliacaoSerializer
@@ -62,7 +63,7 @@ class CursoViewSet(viewsets.ModelViewSet):
         O default do parâmetro methods do decorator action já possui o 'get'.
 
         Avaliações de um curso específico. Essas avaliações do curso são acessadas através do id do curso.
-        O endpoint será: 'cursos/id/avaliacoes/'.
+        O endpoint é: 'cursos/id/avaliacoes/'.
         """
         curso = self.get_object()
         serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
@@ -70,6 +71,16 @@ class CursoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class AvaliacaoViewSet(viewsets.ModelViewSet):
+# class AvaliacaoViewSet(viewsets.ModelViewSet):
+#     queryset = Avaliacao.objects.all()
+#     serializer_class = AvaliacaoSerializer
+
+class AvaliacaoViewSet(  # mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet
+):
     queryset = Avaliacao.objects.all()
     serializer_class = AvaliacaoSerializer
