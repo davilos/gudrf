@@ -65,8 +65,18 @@ class CursoViewSet(viewsets.ModelViewSet):
         Avaliações de um curso específico. Essas avaliações do curso são acessadas através do id do curso.
         O endpoint é: 'cursos/id/avaliacoes/'.
         """
-        curso = self.get_object()
-        serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
+        self.pagination_class.page_size = 1
+        avaliacoes = Avaliacao.objects.filter(curso_id=pk)
+        page = self.paginate_queryset(avaliacoes)
+
+        self.pagination_class.page_size = 2  # Redefinindo o tamanho da paginação para o padrão
+
+        if avaliacoes.exists():
+            serializer = AvaliacaoSerializer(page, many=True)
+
+            return self.get_paginated_response(serializer.data)
+
+        serializer = AvaliacaoSerializer(avaliacoes, many=True)
 
         return Response(serializer.data)
 
